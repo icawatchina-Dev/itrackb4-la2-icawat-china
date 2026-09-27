@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Barangays in Catanduanes</title>
-</head>
-<body>
-    <h1>Barangays in Catanduanes</h1>
-    <p>Prepared by: China M. Icawat</p>
+@extends('layouts.app')
 
-    <table border="1" cellpadding="8">
+@section('title', 'Barangay Population Summary')
+
+@section('content')
+    <h2>Barangay Population Summary</h2>
+    <div class="table-responsive">
+    <table class="table table-striped table-bordered align-middle">
         <tr>
             <th>Name</th>
             <th>Municipality</th>
@@ -22,5 +20,5 @@
             </tr>
         @endforeach
     </table>
-</body>
-</html>
+    </div>
+@endsection

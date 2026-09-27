@@ -64,3 +64,21 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Barangay Activity Reasoning
+
+### Q1: Why No New Route?
+
+Laravel matches a request to a route using its HTTP method and URL path. The municipality and population group are after the `?` in the query string, so they do not change the `/brgys` path the router matches. The existing index route reads both query values and filters the list.
+
+### Q2: Filters as Route Parameters
+
+If course and year were both required route parameters, a year-4-only URL could look like `/students/all/4`. The `all` segment would mean no course filter, while `4` would occupy the year parameter. Without that placeholder, the route could not tell which parameter the lone value belongs to.
+
+### Q3: Active Navigation
+
+The navigation checks `request()->is('brgys*')`, so the `*` is needed to match longer detail paths such as `/brgys/4`. A query-filtered list still has the `/brgys` path because its filters come after `?`. That is why the same pattern stays active for both detail pages and filtered lists.
+
+### Q4: Replaced Code and Future Work
+
+The old filter method was replaced by filtering inside `index()` using query parameters, so keeping the old method would leave duplicate, unused behavior. The empty `store()` and `update()` methods are different: those actions have not been built yet and remain as reminders of future resource work. They are not registered as routes until they are implemented.
